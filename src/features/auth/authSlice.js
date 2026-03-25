@@ -10,7 +10,6 @@ import {
 // For developing: Start with a dummy account
 const DUMMY_ACCOUNT = { email: "test123@gmail.com", password: "dev1234" };
 
-// Utility to get list of users from localStorage or seed with dummy
 const USERS_KEY = "canteen_users";
 const loadUsers = () => {
   try {
@@ -32,13 +31,12 @@ const saveUsers = (users) => {
   try {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   } catch (e) {
-    // fail silently in dev
+    
   }
 };
 
 const initialState = {
-  // Still keep currentUser for auth, but track users list for login/signup
-  currentUser: getAuthFromStorage(), // { email, password }
+  currentUser: getAuthFromStorage(), 
   users: loadUsers(),
 };
 
@@ -48,7 +46,6 @@ const authSlice = createSlice({
   reducers: {
     signup: (state, action) => {
       const { email, password } = action.payload;
-      // Check if user with email already exists
       const exists = state.users.some((u) => u.email === email);
       if (exists) {
         alert("User already exists. Please login.");
