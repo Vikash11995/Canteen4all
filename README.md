@@ -1,7 +1,7 @@
 ## to run this project in your system follow these steps
 
 ```
-cd canteen4all
+cd Canteen4all
 npm i
 npm run dev
 ```
