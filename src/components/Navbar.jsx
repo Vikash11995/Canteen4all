@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { IoCartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCartTab } from '../features/Cart';
-import CartTab from './CartTab'; // Import CartTab component
+import CartTab from './CartTab'; 
 
 function ProfileSection() {
   return (
@@ -92,7 +92,7 @@ function Navbar() {
 
   return (
     <header
-      className="relative bg-white shadow"
+      className="relative bg-[#F3F4F4] shadow"
       style={{ height: NAVBAR_HEIGHT, zIndex: 50 }}
     >
       <div

@@ -65,17 +65,10 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-300 hover:from-orange-400 hover:to-orange-400 shadow-md text-white font-semibold rounded-lg py-3 mt-1 transition"
+            className="w-full bg-linear-to-r from-orange-500 to-orange-300 hover:from-orange-400 hover:to-orange-400 shadow-md text-white font-semibold rounded-lg py-3 mt-1 transition"
           >
             Login
           </button>
-          {/* <button
-            type="button"
-            onClick={handleSignUp}
-            className="w-full text-orange-600 hover:underline font-medium text-sm mt-1"
-          >
-            New user? Sign Up
-          </button> */}
            <div className="w-full text-center mt-6">
           <span className="w-full text-orange-600 font-medium text-sm mt-1">
             New user?{" "}

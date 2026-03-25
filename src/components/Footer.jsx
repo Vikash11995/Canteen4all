@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-       <footer className="bg-gradient-to-br from-orange-100 to-orange-300 text-zinc-600 py-8">
+       <footer className="bg-[#F3F4F4] text-zinc-600 py-8">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-3 gap-16">
           <div>
             <h4 className="font-bold text-lg mb-2">Canteen4All</h4>

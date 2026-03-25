@@ -5,17 +5,47 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Profile from "./components/Profile";
 
+import PublicRoute from "./utils/PublicRoute";
+
 function App() {
   return (
-    <div className="bg-zinc-700 min-h-screen min-w-full">
+    <div className="bg-linear-to-r from-orange-500 to-orange-300 min-h-screen min-w-full">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <SignUp />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+            
+                <Layout />
+       
+            }
+          >
             <Route index element={<Home />} />
           </Route>
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+          
+                <Profile />
+           
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

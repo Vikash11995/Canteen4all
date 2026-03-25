@@ -20,14 +20,14 @@ const ProductCard = (props) => {
         quantity: 1,
       }));
     }
-    // Optionally, you could show a toast or message if hitting the limit
+   
   };
 
   return (
     <div className='bg-gray-100 p-5 rounded-xl shadow-sm'>
       <Link to={slug}>
-        <div>
-          <img src={image} alt={name} className='md:h-70 h-78 w-full object-cover object-top drop-shadow-[0_80px_30px_#0007]' />
+        <div className='bg-gray-200 p-0.5 rounded-lg'>
+          <img src={image} alt={name} className='md:h-70 h-78 w-full object-contain  ' />
         </div>
       </Link>
       <Link to={slug}>
@@ -74,13 +74,13 @@ const ProductCard = (props) => {
             return (
               <div className="flex items-center gap-2">
                 <button
-                  className="bg-gray-300 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-xl hover:bg-gray-400"
+                  className="bg-amber-300 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-xl hover:bg-amber-400"
                   onClick={handleDecrease}
                   disabled={cartItem.quantity <= 0}
                 >-</button>
                 <span className="mx-1 text-lg font-medium">{cartItem.quantity}</span>
                 <button
-                  className={`bg-gray-300 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-xl hover:bg-gray-400 ${cartItem.quantity >= MAX_PRODUCT_QUANTITY ? 'opacity-50 cursor-default' : ''}`}
+                  className={`bg-amber-300 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-xl hover:bg-amber-400 ${cartItem.quantity >= MAX_PRODUCT_QUANTITY ? 'opacity-50 cursor-default' : ''}`}
                   onClick={handleIncrease}
                   disabled={cartItem.quantity >= MAX_PRODUCT_QUANTITY}
                   title={cartItem.quantity >= MAX_PRODUCT_QUANTITY ? `Max ${MAX_PRODUCT_QUANTITY} allowed` : ''}
@@ -90,11 +90,11 @@ const ProductCard = (props) => {
           } else {
             return (
               <button
-                className={`flex justify-center text-white bg-slate-900 hover:bg-slate-900/90 shadow-sm shadow-zinc-400 hover:shadow-lg transition-transform duration-300 p-1.5 rounded-sm gap-2 items-center cursor-pointer outline-none active:scale-95 active:bg-gray-400`}
+                className={`flex justify-center text-zinc-700 font-medium bg-orange-500 hover:bg-orange-500/80 shadow-sm shadow-zinc-400 hover:shadow-md transition-transform duration-300 p-1.5 rounded-sm gap-2 items-center cursor-pointer outline-none active:scale-95 active:bg-gray-300`}
                 onClick={handleCartItems}
               >
                 <IoCartOutline size={21} className='' />
-                Add to Cart
+                Buy
               </button>
             );
           }
