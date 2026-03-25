@@ -28,24 +28,10 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
-            path="/home"
-            element={
-            
-                <Layout />
-       
-            }
-          >
+          <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
           </Route>
-          <Route
-            path="/profile"
-            element={
-          
-                <Profile />
-           
-            }
-          />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

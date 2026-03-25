@@ -7,8 +7,11 @@ import {
   removeAuthFromStorage,
 } from "../../utils/localStorage";
 
+// Helper function to generate a unique referral code
+
+
 // For developing: Start with a dummy account
-const DUMMY_ACCOUNT = { email: "test123@gmail.com", password: "dev1234" };
+const DUMMY_ACCOUNT = { email: "test123@gmail.com", password: "dev1234", name: "Test User", referralCode: "ABCDEFGH" };
 
 const USERS_KEY = "canteen_users";
 const loadUsers = () => {
@@ -31,12 +34,12 @@ const saveUsers = (users) => {
   try {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   } catch (e) {
-    
+    // handle error if needed
   }
 };
 
 const initialState = {
-  currentUser: getAuthFromStorage(), 
+  currentUser: getAuthFromStorage(),
   users: loadUsers(),
 };
 
@@ -45,13 +48,26 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signup: (state, action) => {
-      const { email, password } = action.payload;
+      // Accepts more fields besides email and password
+      const { email, password, name, ...rest } = action.payload;
       const exists = state.users.some((u) => u.email === email);
       if (exists) {
         alert("User already exists. Please login.");
         return;
       }
-      const newUser = { email, password };
+      // Generate unique referral code for new user
+      let referralCode;
+      let attempts = 100;
+      do {
+        referralCode = generateReferralCode(8);
+        attempts--;
+      } while (
+        state.users.some((u) => u.referralCode === referralCode) && attempts > 0
+      );
+      if (!referralCode) {
+        referralCode = generateReferralCode(8); // fallback
+      }
+      const newUser = { email, password, name: name || email, referralCode, ...rest };
       state.users.push(newUser);
       state.currentUser = newUser;
       saveUsers(state.users);
@@ -76,8 +92,25 @@ const authSlice = createSlice({
       state.currentUser = null;
       removeAuthFromStorage();
     },
+
+    // Add an updateProfile reducer to allow updating of user info, excluding referralCode and email fields
+    updateProfile: (state, action) => {
+      const updatedFields = action.payload;
+      if (!state.currentUser) return;
+      const idx = state.users.findIndex(u => u.email === state.currentUser.email);
+      if (idx !== -1) {
+        // Prevent updating email and referralCode
+        const safeUpdates = { ...updatedFields };
+        delete safeUpdates.email;
+        delete safeUpdates.referralCode;
+        state.users[idx] = { ...state.users[idx], ...safeUpdates };
+        state.currentUser = { ...state.currentUser, ...safeUpdates };
+        saveUsers(state.users);
+        saveAuthToStorage(state.currentUser);
+      }
+    }
   },
 });
 
-export const { signup, login, logout } = authSlice.actions;
+export const { signup, login, logout, updateProfile } = authSlice.actions;
 export default authSlice.reducer;

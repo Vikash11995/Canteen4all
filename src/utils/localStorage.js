@@ -13,11 +13,9 @@ export const removeAuthFromStorage = () => {
 
 export const getCartFromStorage = (email) => {
   if (!email) return [];
-  // Get all localstorage keys that start with "cart_"
   const cartData = localStorage.getItem(`cart_${email}`);
   if (!cartData) return [];
   try {
-    // Return cart items array for this user
     return JSON.parse(cartData);
   } catch (e) {
     return [];
