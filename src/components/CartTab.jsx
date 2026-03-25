@@ -56,7 +56,7 @@ const CartTab = () => {
           Close
         </button>
         <button className='text-xl font-semibold text-white bg-amber-600 cursor-pointer'>  {carts.length > 0 ? (<div className='text-shadow-lg text-lg'>
-         <h3>Checkout</h3> ${totalAmount.toFixed(2)} </div>    ) : (
+         <h3>Checkout</h3> ₹{totalAmount.toFixed(2)} </div>    ) : (
           <h3 className="text-xl font-semibold text-white bg-amber-600 cursor-pointe">Checkout</h3>
         )}</button>
       </div>

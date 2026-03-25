@@ -62,7 +62,7 @@ const CartItem = (props) => {
     >
       <img src={detail.image} alt={detail.name} className="w-12" />
       <h3>{detail.name}</h3>
-      <p>${detail.price * quantity}</p>
+      <p>₹{detail.price * quantity}</p>
       <div className="flex flex-col items-end w-20 justify-between top-0 h-16 ">
       <AiOutlineDelete className="w-[30px] cursor-pointer right-6 top-22 " onClick={handleDelete} />
       <div className="flex justify-between w-20 gap-1 ">
