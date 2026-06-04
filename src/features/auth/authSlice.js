@@ -7,9 +7,6 @@ import {
   removeAuthFromStorage,
 } from "../../utils/localStorage";
 
-// Helper function to generate a unique referral code
-
-
 // For developing: Start with a dummy account
 const DUMMY_ACCOUNT = { email: "test123@gmail.com", password: "dev1234", name: "Test User", referralCode: "ABCDEFGH" };
 
@@ -55,18 +52,8 @@ const authSlice = createSlice({
         alert("User already exists. Please login.");
         return;
       }
-      // Generate unique referral code for new user
-      let referralCode;
-      let attempts = 100;
-      do {
-        referralCode = generateReferralCode(8);
-        attempts--;
-      } while (
-        state.users.some((u) => u.referralCode === referralCode) && attempts > 0
-      );
-      if (!referralCode) {
-        referralCode = generateReferralCode(8); // fallback
-      }
+      // Use a placeholder/default referral code or simply don't generate
+      const referralCode = "ABCDEFGH";
       const newUser = { email, password, name: name || email, referralCode, ...rest };
       state.users.push(newUser);
       state.currentUser = newUser;

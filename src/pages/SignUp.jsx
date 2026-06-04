@@ -4,15 +4,6 @@ import { signup } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Toast from "../components/Toast";
 
-const generateReferralCode = (length = 8) => {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "";
-  for (let i = 0; i < length; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return code;
-};
-
 const SignUp = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [toast, setToast] = useState(null);
@@ -39,7 +30,7 @@ const SignUp = () => {
       const trimmedPassword = form.password;
 
       if (!trimmedName || !trimmedEmail || !trimmedPassword) {
-        setToast({ message: "Please fill all fields.", type: "error" });
+        setToast({ message: "Please fill all fields." });
         return;
       }
 
@@ -48,32 +39,14 @@ const SignUp = () => {
       if (exists) {
         setToast({
           message: "User already exists. Please login.",
-          type: "error",
         });
         return;
       }
 
-      let referralCode;
-      let attempts = 100;
-
-      do {
-        referralCode = generateReferralCode();
-        attempts--;
-      } while (
-        users.some((u) => u.referralCode && u.referralCode === referralCode) &&
-        attempts > 0
-      );
-
-      if (!referralCode) {
-        setToast({ message: "Referral code generation failed. Try again.", type: "error" });
-        return;
-      }
-
-      const newUser = { name: trimmedName, email: trimmedEmail, password: trimmedPassword, referralCode };
+      const newUser = { name: trimmedName, email: trimmedEmail, password: trimmedPassword };
       dispatch(signup(newUser));
       setToast({
-        message: `Signup successful! Your referral code: ${referralCode}`,
-        type: "success",
+        message: `Signup successful!`,
       });
       setTimeout(() => {
         navigate("/");
